@@ -97,6 +97,22 @@ section{padding:110px 7%;position:relative}
 .product-meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:14px;color:var(--muted);font-size:13px}
 .product-card h3{font-family:Orbitron,sans-serif;font-size:20px;margin-bottom:12px}
 .product-card p{color:var(--muted);line-height:1.7;margin-bottom:18px}
+
+/* ===== Modal de imagem com zoom no cursor ===== */
+.product-image.has-preview{cursor:zoom-in;}
+.product-image.has-preview::after{content:'Clique para ampliar';position:absolute;right:12px;bottom:12px;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:12px;font-weight:800;opacity:0;transform:translateY(8px);transition:.25s;z-index:3;pointer-events:none;}
+.product-card:hover .product-image.has-preview::after{opacity:1;transform:translateY(0);}
+.product-image.has-preview img{will-change:transform;}
+.image-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);z-index:99999;display:none;align-items:center;justify-content:center;padding:28px;}
+.image-modal.open{display:flex;}
+.image-modal-box{position:relative;max-width:min(92vw,1200px);max-height:88vh;}
+.image-modal-close{position:absolute;top:-18px;right:-18px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(0,0,0,.85);color:#fff;font-size:26px;line-height:1;cursor:pointer;z-index:2;box-shadow:0 0 24px rgba(185,55,255,.35);}
+.image-modal-title{position:absolute;left:16px;top:16px;z-index:2;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.72);color:#fff;font-size:13px;font-weight:800;pointer-events:none;}
+.image-modal-zoom{position:relative;overflow:hidden;border-radius:24px;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 80px rgba(185,55,255,.26);background:#07030b;cursor:zoom-in;}
+.image-modal-zoom img{display:block;max-width:92vw;max-height:88vh;width:auto;height:auto;transform-origin:center center;transition:transform .12s ease-out;user-select:none;-webkit-user-drag:none;}
+.image-modal-zoom.zooming img{transform:scale(2.15);}
+@media(max-width:760px){.image-modal{padding:14px}.image-modal-title{font-size:11px}.image-modal-close{top:8px;right:8px}.image-modal-zoom img{max-width:96vw;max-height:82vh}.product-image.has-preview::after{display:none}}
+
 .price{font-size:24px;font-weight:900;color:#fff;text-shadow:0 0 14px rgba(185,55,255,.7);margin-bottom:18px}
 .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .result-card{padding:34px;text-align:center;transition:.35s}
@@ -132,7 +148,7 @@ footer{padding:45px 7%;text-align:center;color:var(--muted);border-top:1px solid
 .trust-pill i{color:var(--purple);filter:drop-shadow(0 0 8px rgba(185,55,255,.9))}.trust-pill-fix{justify-content:center;padding-left:0}.trust-pill-fix span{display:block;line-height:1.25;text-align:center}@media(max-width:760px){.trust-pill-fix{justify-content:center!important;padding-left:0!important}.trust-pill-fix i{margin-right:8px}.trust-pill-fix span{text-align:center!important}}
 .hotmart-note{max-width:920px;margin:18px auto 0;text-align:center;color:var(--muted);line-height:1.8;font-size:14px}
 
-@media(max-width:760px){body{cursor:auto}.cursor,.cursor-dot{display:none}section{padding:85px 5%}.nav{border-radius:24px;align-items:flex-start}.nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:rgba(0,0,0,.92);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:20px;flex-direction:column}.nav-links.open{display:flex}.mobile-menu{display:block}.products-grid,.results-grid,.testimonials,.skills,.form-grid,.trust-bar{grid-template-columns:1fr}.support{padding:40px 22px}.card-actions{flex-direction:column}.btn{width:100%}}
+@media(max-width:760px){body{cursor:auto}.cursor,.cursor-dot{display:none}section{padding:85px 5%}.nav{border-radius:24px;align-items:flex-start}.mobile-menu{position:relative;top:6px}.nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:rgba(0,0,0,.92);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:20px;flex-direction:column}.nav-links.open{display:flex}.mobile-menu{display:block}.products-grid,.results-grid,.testimonials,.skills,.form-grid,.trust-bar{grid-template-columns:1fr}.support{padding:40px 22px}.card-actions{flex-direction:column}.btn{width:100%}}
 
 /* ===================== CYBERPUNK ELEGANTE - REFINOS VISUAIS ===================== */
 .scanlines{position:fixed;inset:0;z-index:999998;pointer-events:none;opacity:.08;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.55) 0,rgba(255,255,255,.55) 1px,transparent 1px,transparent 7px);mix-blend-mode:overlay}
@@ -344,6 +360,17 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
   </footer>
 </div>
 
+
+<div class="image-modal" id="imageModal" aria-hidden="true">
+  <div class="image-modal-box" role="dialog" aria-modal="true" aria-label="Prévia ampliada do produto">
+    <button class="image-modal-close" id="imageModalClose" type="button" aria-label="Fechar">×</button>
+    <div class="image-modal-title" id="imageModalTitle"></div>
+    <div class="image-modal-zoom" id="imageModalZoom">
+      <img id="imageModalImg" src="" alt="">
+    </div>
+  </div>
+</div>
+
 <script>
 /* ===================== PRODUTOS ===================== */
 const templates = [
@@ -354,7 +381,7 @@ const templates = [
 ];
 
 const packs = [
-  { nome:'Pack Instagram Profissional', categoria:'Social Media', preco:'R$ 47', badge:'30 posts', imagem:'', descricao:'Artes para feed, stories e chamadas comerciais.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' },
+  { nome:'Pack Burger Premium', categoria:'Loja', preco:'R$ 36', badge:'Restaurante', imagem:'imagens/posts/pack-burger.png', descricao:'30 posts profissionais, 15 Artes para feed, 5 Stories e 2 Carrosséis. Ideal para hamburguerias, restaurantes, lanchonetes, food trucks e negócios do ramo alimentício que desejam manter uma presença forte e profissional nas redes sociais.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' },
   { nome:'Pack Beauty', categoria:'Beleza', preco:'R$ 39', badge:'Canva', imagem:'', descricao:'Posts editáveis para salão, estética, nails e beleza.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' },
   { nome:'Pack Loja Online', categoria:'Loja', preco:'R$ 49', badge:'Vendas', imagem:'', descricao:'Criativos para promoções, lançamentos e ofertas.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' },
   { nome:'Pack Infoproduto', categoria:'Digital', preco:'R$ 59', badge:'Estratégico', imagem:'', descricao:'Posts para lançamento, autoridade e prova social.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' }
@@ -379,10 +406,11 @@ document.getElementById('mobileMenu').addEventListener('click',()=>document.getE
 document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()=>btn.parentElement.classList.toggle('active')));
 
 function makeCard(item,type){
-  const img = item.imagem ? `<img src="${item.imagem}" alt="${item.nome}">` : `<div class="product-placeholder">${item.nome}</div>`;
+  const img = item.imagem ? `<img src="${item.imagem}" alt="${item.nome}" loading="lazy">` : `<div class="product-placeholder">${item.nome}</div>`;
+  const previewAttrs = item.imagem ? ` has-preview" data-preview-src="${item.imagem}" data-preview-title="${item.nome.replace(/"/g,'&quot;')}"` : `"`;
   const demoBtn = type==='template' ? `<a class="btn btn-outline btn-small" href="${item.demo}" target="_blank"><i class="fa-solid fa-eye"></i> Ver demo</a>` : '';
   return `<article class="product-card glass" data-category="${item.categoria}" data-name="${item.nome} ${item.descricao} ${item.badge}">
-    <div class="product-image">${img}<span class="badge-product">${item.badge || item.categoria}</span></div>
+    <div class="product-image${previewAttrs}>${img}<span class="badge-product">${item.badge || item.categoria}</span></div>
     <div class="product-content"><div class="product-meta"><span>${item.categoria}</span><span>${item.badge || ''}</span></div><h3>${item.nome}</h3><p>${item.descricao}</p><div class="price">${item.preco}</div><div class="card-actions">${demoBtn}<a class="btn btn-primary btn-small" href="${item.compra}" target="_blank"><i class="fa-solid fa-cart-shopping"></i> Comprar na Hotmart</a></div></div>
   </article>`;
 }
@@ -438,6 +466,55 @@ function renderFilters(list,containerId,gridId,searchId,type,loadMoreId,counterI
 }
 renderFilters(templates,'templateFilters','templatesGrid','templateSearch','template','templatesLoadMore','templatesCounter');
 renderFilters(packs,'packFilters','packsGrid','packSearch','pack','packsLoadMore','packsCounter');
+
+
+/* ===================== MODAL COM ZOOM REAL ===================== */
+const imageModal=document.getElementById('imageModal');
+const imageModalImg=document.getElementById('imageModalImg');
+const imageModalTitle=document.getElementById('imageModalTitle');
+const imageModalZoom=document.getElementById('imageModalZoom');
+const imageModalClose=document.getElementById('imageModalClose');
+
+function openImageModal(src,title){
+  if(!src) return;
+  imageModalImg.src=src;
+  imageModalImg.alt=title || 'Prévia do produto';
+  imageModalTitle.textContent=title || 'Prévia do produto';
+  imageModal.classList.add('open');
+  imageModal.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closeImageModal(){
+  imageModal.classList.remove('open');
+  imageModal.setAttribute('aria-hidden','true');
+  imageModalZoom.classList.remove('zooming');
+  imageModalImg.style.transformOrigin='center center';
+  imageModalImg.src='';
+  document.body.style.overflow='';
+}
+
+document.addEventListener('click',e=>{
+  const preview=e.target.closest('.product-image.has-preview');
+  if(preview){
+    e.preventDefault();
+    openImageModal(preview.dataset.previewSrc, preview.dataset.previewTitle);
+  }
+});
+imageModalClose.addEventListener('click',closeImageModal);
+imageModal.addEventListener('click',e=>{if(e.target===imageModal) closeImageModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape' && imageModal.classList.contains('open')) closeImageModal();});
+
+imageModalZoom.addEventListener('mousemove',e=>{
+  const rect=imageModalZoom.getBoundingClientRect();
+  const x=((e.clientX-rect.left)/rect.width)*100;
+  const y=((e.clientY-rect.top)/rect.height)*100;
+  imageModalZoom.classList.add('zooming');
+  imageModalImg.style.transformOrigin=`${x}% ${y}%`;
+});
+imageModalZoom.addEventListener('mouseleave',()=>{
+  imageModalZoom.classList.remove('zooming');
+  imageModalImg.style.transformOrigin='center center';
+});
 
 
 let counted=false;
