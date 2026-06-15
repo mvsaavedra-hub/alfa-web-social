@@ -61,6 +61,8 @@ section{padding:110px 7%;position:relative}
 .btn-primary:hover,.btn-outline:hover{transform:translateY(-5px) scale(1.02)}
 .btn-outline{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.16);color:#fff}
 .btn-small{padding:12px 16px;font-size:13px;min-height:42px}
+.btn-disabled{background:#9ca3af!important;color:#fff!important;box-shadow:none!important;cursor:not-allowed!important;pointer-events:none!important;opacity:.85!important}
+.btn-disabled:hover{transform:none!important}
 .hero-logo{position:relative;display:flex;justify-content:center;align-items:center}
 .hero-logo::before{content:'';position:absolute;width:78%;height:78%;border-radius:50%;background:radial-gradient(circle,rgba(185,55,255,.28),transparent 62%);filter:blur(30px);animation:halo 4s infinite alternate}
 @keyframes halo{to{transform:scale(1.1);opacity:.7}}
@@ -381,7 +383,7 @@ const templates = [
 ];
 
 const packs = [
-  { nome:'Pack Burger Premium', categoria:'Loja', preco:'R$ 36', badge:'Restaurante', imagem:'imagens/posts/pack-burger.png', descricao:'30 posts profissionais, 15 Artes para feed, 5 Stories e 2 Carrosséis. Ideal para hamburguerias, restaurantes, lanchonetes, food trucks e negócios do ramo alimentício que desejam manter uma presença forte e profissional nas redes sociais.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' },
+  { nome:'Pack Burger Premium', categoria:'Loja', preco:'R$ 36', badge:'Restaurante', imagem:'imagens/posts/pack-burger.png', descricao:'30 posts profissionais, 15 Artes para feed, 5 Stories e 2 Carrosséis. Ideal para hamburguerias, restaurantes, lanchonetes, food trucks e negócios do ramo alimentício que desejam manter uma presença forte e profissional nas redes sociais.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO', indisponivel:true },
   { nome:'Pack Beauty', categoria:'Beleza', preco:'R$ 39', badge:'Canva', imagem:'', descricao:'Posts editáveis para salão, estética, nails e beleza.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' },
   { nome:'Pack Loja Online', categoria:'Loja', preco:'R$ 49', badge:'Vendas', imagem:'', descricao:'Criativos para promoções, lançamentos e ofertas.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' },
   { nome:'Pack Infoproduto', categoria:'Digital', preco:'R$ 59', badge:'Estratégico', imagem:'', descricao:'Posts para lançamento, autoridade e prova social.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' }
@@ -409,9 +411,12 @@ function makeCard(item,type){
   const img = item.imagem ? `<img src="${item.imagem}" alt="${item.nome}" loading="lazy">` : `<div class="product-placeholder">${item.nome}</div>`;
   const previewAttrs = item.imagem ? ` has-preview" data-preview-src="${item.imagem}" data-preview-title="${item.nome.replace(/"/g,'&quot;')}"` : `"`;
   const demoBtn = type==='template' ? `<a class="btn btn-outline btn-small" href="${item.demo}" target="_blank"><i class="fa-solid fa-eye"></i> Ver demo</a>` : '';
+  const buyBtn = item.indisponivel
+    ? `<span class="btn btn-small btn-disabled" aria-disabled="true"><i class="fa-solid fa-ban"></i> Indisponível</span>`
+    : `<a class="btn btn-primary btn-small" href="${item.compra}" target="_blank"><i class="fa-solid fa-cart-shopping"></i> Comprar na Hotmart</a>`;
   return `<article class="product-card glass" data-category="${item.categoria}" data-name="${item.nome} ${item.descricao} ${item.badge}">
     <div class="product-image${previewAttrs}>${img}<span class="badge-product">${item.badge || item.categoria}</span></div>
-    <div class="product-content"><div class="product-meta"><span>${item.categoria}</span><span>${item.badge || ''}</span></div><h3>${item.nome}</h3><p>${item.descricao}</p><div class="price">${item.preco}</div><div class="card-actions">${demoBtn}<a class="btn btn-primary btn-small" href="${item.compra}" target="_blank"><i class="fa-solid fa-cart-shopping"></i> Comprar na Hotmart</a></div></div>
+    <div class="product-content"><div class="product-meta"><span>${item.categoria}</span><span>${item.badge || ''}</span></div><h3>${item.nome}</h3><p>${item.descricao}</p><div class="price">${item.preco}</div><div class="card-actions">${demoBtn}${buyBtn}</div></div>
   </article>`;
 }
 function categories(list){return ['Todos',...Array.from(new Set(list.map(i=>i.categoria)))];}
