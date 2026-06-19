@@ -61,8 +61,6 @@ section{padding:110px 7%;position:relative}
 .btn-primary:hover,.btn-outline:hover{transform:translateY(-5px) scale(1.02)}
 .btn-outline{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.16);color:#fff}
 .btn-small{padding:12px 16px;font-size:13px;min-height:42px}
-.btn-disabled{background:#9ca3af!important;color:#fff!important;box-shadow:none!important;cursor:not-allowed!important;pointer-events:none!important;opacity:.85!important}
-.btn-disabled:hover{transform:none!important}
 .hero-logo{position:relative;display:flex;justify-content:center;align-items:center}
 .hero-logo::before{content:'';position:absolute;width:78%;height:78%;border-radius:50%;background:radial-gradient(circle,rgba(185,55,255,.28),transparent 62%);filter:blur(30px);animation:halo 4s infinite alternate}
 @keyframes halo{to{transform:scale(1.1);opacity:.7}}
@@ -104,8 +102,8 @@ section{padding:110px 7%;position:relative}
 .product-image.has-preview{cursor:zoom-in;}
 .product-image.has-preview::after{content:'Clique para ampliar';position:absolute;right:12px;bottom:12px;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:12px;font-weight:800;opacity:0;transform:translateY(8px);transition:.25s;z-index:3;pointer-events:none;}
 .product-card:hover .product-image.has-preview::after{opacity:1;transform:translateY(0);}
-.product-image.has-preview img{will-change:transform;}
-.image-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);z-index:99999;display:none;align-items:center;justify-content:center;padding:28px;}
+.product-image.has-preview img{will-change:auto;}
+.image-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99999;display:none;align-items:center;justify-content:center;padding:28px;}
 .image-modal.open{display:flex;}
 .image-modal-box{position:relative;max-width:min(92vw,1200px);max-height:88vh;}
 .image-modal-close{position:absolute;top:-18px;right:-18px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(0,0,0,.85);color:#fff;font-size:26px;line-height:1;cursor:pointer;z-index:2;box-shadow:0 0 24px rgba(185,55,255,.35);}
@@ -113,7 +111,7 @@ section{padding:110px 7%;position:relative}
 .image-modal-zoom{position:relative;overflow:hidden;border-radius:24px;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 80px rgba(185,55,255,.26);background:#07030b;cursor:zoom-in;}
 .image-modal-zoom img{display:block;max-width:92vw;max-height:88vh;width:auto;height:auto;transform-origin:center center;transition:transform .12s ease-out;user-select:none;-webkit-user-drag:none;}
 .image-modal-zoom.zooming img{transform:scale(2.15);}
-@media(max-width:760px){.image-modal{padding:14px}.image-modal-title{font-size:11px}.image-modal-close{top:8px;right:8px}.image-modal-zoom img{max-width:96vw;max-height:82vh}.product-image.has-preview::after{display:none}}
+@media(max-width:760px){.image-modal{padding:14px;backdrop-filter:none;-webkit-backdrop-filter:none}.image-modal-title{font-size:11px}.image-modal-close{top:8px;right:8px}.image-modal-zoom{cursor:default;box-shadow:0 0 24px rgba(185,55,255,.18)}.image-modal-zoom img{max-width:96vw;max-height:82vh;transition:none;transform:none!important}.image-modal-zoom.zooming img{transform:none!important}.product-image.has-preview::after{display:none}}
 
 .price{font-size:24px;font-weight:900;color:#fff;text-shadow:0 0 14px rgba(185,55,255,.7);margin-bottom:18px}
 .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
@@ -306,7 +304,7 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
       <div class="testimonial glass"><div class="stars"><i class="fa-solid fa-pen-ruler"></i></div><p><strong>Produtos totalmente editáveis</strong><br>Altere textos, cores, imagens e links para adaptar o material à sua marca.</p></div>
       <div class="testimonial glass"><div class="stars"><i class="fa-solid fa-lock"></i></div><p><strong>Compra segura via Hotmart</strong><br>A finalização da compra acontece em uma plataforma conhecida, segura e preparada para produtos digitais.</p></div>
       <div class="testimonial glass"><div class="stars"><i class="fa-solid fa-list-check"></i></div><p><strong>Guia de instalação incluso</strong><br>Você recebe instruções para instalar, configurar e usar o produto adquirido.</p></div>
-      <div class="testimonial glass"><div class="stars"><i class="fa-solid fa-headset"></i></div><p><strong>Contato para dúvidas</strong><br>Formulário simples para enviar perguntas sobre produtos, acesso, instalação ou orientação após a compra.</p></div>
+      <div class="testimonial glass"><div class="stars"><i class="fa-solid fa-headset"></i></div><p><strong>Contato para dúvidas</strong><br>Formulário simples para enviar perguntas sobre produtos, acesso e instalação.</p></div>
       <div class="testimonial glass"><div class="stars"><i class="fa-solid fa-bolt"></i></div><p><strong>Pronto para usar</strong><br>Templates e packs pensados para acelerar sua presença digital sem começar do zero.</p></div>
       <div class="testimonial glass"><div class="stars"><i class="fa-solid fa-layer-group"></i></div><p><strong>Catálogo em crescimento</strong><br>Novos templates, páginas e packs podem ser adicionados à vitrine conforme a ALFA evolui.</p></div>
     </div>
@@ -315,14 +313,10 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
   <section class="reveal" id="faq">
     <h2 class="section-title">Perguntas <span>Frequentes</span></h2>
     <div class="faq">
-      <div class="faq-item glass"><button class="faq-q">Os templates são editáveis? <span>+</span></button><div class="faq-a">Sim. Os templates são entregues com estrutura pronta para edição, permitindo alterar textos, cores, imagens e links conforme a proposta do produto adquirido.</div></div>
-      <div class="faq-item glass"><button class="faq-q">A compra é feita neste site? <span>+</span></button><div class="faq-a">Não. Este site funciona apenas como vitrine dos produtos. Ao clicar em “Comprar na Hotmart”, você será redirecionado para a página oficial do produto na Hotmart.</div></div>
       <div class="faq-item glass"><button class="faq-q">Como recebo o produto? <span>+</span></button><div class="faq-a">Após a confirmação do pagamento, a entrega e o acesso seguem as instruções da própria Hotmart e da página oficial do produto comprado.</div></div>
       <div class="faq-item glass"><button class="faq-q">Posso personalizar cores, textos e imagens? <span>+</span></button><div class="faq-a">Sim. Todos os produtos são editáveis para que você possa trocar textos, imagens, cores, links e adaptar o material para sua marca.</div></div>
       <div class="faq-item glass"><button class="faq-q">Receberei instruções para instalação? <span>+</span></button><div class="faq-a">Sim. Junto com o produto você receberá um guia passo a passo mostrando como instalar, configurar e utilizar o material adquirido. Os templates incluem instruções sobre onde inserir os códigos e como realizar as principais personalizações.</div></div>
-      <div class="faq-item glass"><button class="faq-q">Preciso saber programar para usar os templates? <span>+</span></button><div class="faq-a">Não. Os produtos acompanham instruções detalhadas para facilitar a instalação e configuração. Caso tenha dúvidas relacionadas ao produto adquirido, você poderá enviar uma mensagem pelo formulário de contato.</div></div>
-      <div class="faq-item glass"><button class="faq-q">Vocês fazem personalização sob encomenda? <span>+</span></button><div class="faq-a">No momento, a ALFA trabalha apenas com produtos prontos e editáveis. Você compra o modelo e faz suas próprias alterações.</div></div>
-      <div class="faq-item glass"><button class="faq-q">Posso revender ou distribuir os produtos? <span>+</span></button><div class="faq-a">Não. Todos os produtos são protegidos por direitos autorais e licenciados apenas para uso do comprador. A revenda, redistribuição, compartilhamento ou disponibilização não autorizada é proibida.</div></div>
+      <div class="faq-item glass"><button class="faq-q">Preciso saber programar para usar os templates? <span>+</span></button><div class="faq-a">Não. Os produtos acompanham instruções detalhadas para facilitar a instalação e configuração. Caso tenha dúvidas relacionadas ao produto adquirido, você poderá entrar em contato pelo suporte do WhatsApp.</div></div>
       <div class="faq-item glass"><button class="faq-q">Preciso contratar hospedagem? <span>+</span></button><div class="faq-a">Não. O site pode ser publicado gratuitamente através do GitHub Pages utilizando o guia de instalação que acompanha o produto. Caso prefira, também pode ser hospedado em outros serviços compatíveis.</div></div>
     </div>
   </section>
@@ -383,7 +377,7 @@ const templates = [
 ];
 
 const packs = [
-  { nome:'Pack Burger Premium', categoria:'Loja', preco:'R$ 36', badge:'Restaurante', imagem:'imagens/posts/pack-burger.png', descricao:'30 posts profissionais, 15 Artes para feed, 5 Stories e 2 Carrosséis. Ideal para hamburguerias, restaurantes, lanchonetes, food trucks e negócios do ramo alimentício que desejam manter uma presença forte e profissional nas redes sociais.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO', indisponivel:true },
+  { nome:'Pack Burger Premium', categoria:'Loja', preco:'R$ 36', badge:'Restaurante', imagem:'imagens/posts/pack-burger.png', descricao:'30 posts profissionais, 15 Artes para feed, 5 Stories e 2 Carrosséis. Ideal para hamburguerias, restaurantes, lanchonetes, food trucks e negócios do ramo alimentício que desejam manter uma presença forte e profissional nas redes sociais.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' },
   { nome:'Pack Beauty', categoria:'Beleza', preco:'R$ 39', badge:'Canva', imagem:'', descricao:'Posts editáveis para salão, estética, nails e beleza.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' },
   { nome:'Pack Loja Online', categoria:'Loja', preco:'R$ 49', badge:'Vendas', imagem:'', descricao:'Criativos para promoções, lançamentos e ofertas.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' },
   { nome:'Pack Infoproduto', categoria:'Digital', preco:'R$ 59', badge:'Estratégico', imagem:'', descricao:'Posts para lançamento, autoridade e prova social.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' }
@@ -411,12 +405,9 @@ function makeCard(item,type){
   const img = item.imagem ? `<img src="${item.imagem}" alt="${item.nome}" loading="lazy">` : `<div class="product-placeholder">${item.nome}</div>`;
   const previewAttrs = item.imagem ? ` has-preview" data-preview-src="${item.imagem}" data-preview-title="${item.nome.replace(/"/g,'&quot;')}"` : `"`;
   const demoBtn = type==='template' ? `<a class="btn btn-outline btn-small" href="${item.demo}" target="_blank"><i class="fa-solid fa-eye"></i> Ver demo</a>` : '';
-  const buyBtn = item.indisponivel
-    ? `<span class="btn btn-small btn-disabled" aria-disabled="true"><i class="fa-solid fa-ban"></i> Indisponível</span>`
-    : `<a class="btn btn-primary btn-small" href="${item.compra}" target="_blank"><i class="fa-solid fa-cart-shopping"></i> Comprar na Hotmart</a>`;
   return `<article class="product-card glass" data-category="${item.categoria}" data-name="${item.nome} ${item.descricao} ${item.badge}">
     <div class="product-image${previewAttrs}>${img}<span class="badge-product">${item.badge || item.categoria}</span></div>
-    <div class="product-content"><div class="product-meta"><span>${item.categoria}</span><span>${item.badge || ''}</span></div><h3>${item.nome}</h3><p>${item.descricao}</p><div class="price">${item.preco}</div><div class="card-actions">${demoBtn}${buyBtn}</div></div>
+    <div class="product-content"><div class="product-meta"><span>${item.categoria}</span><span>${item.badge || ''}</span></div><h3>${item.nome}</h3><p>${item.descricao}</p><div class="price">${item.preco}</div><div class="card-actions">${demoBtn}<a class="btn btn-primary btn-small" href="${item.compra}" target="_blank"><i class="fa-solid fa-cart-shopping"></i> Comprar na Hotmart</a></div></div>
   </article>`;
 }
 function categories(list){return ['Todos',...Array.from(new Set(list.map(i=>i.categoria)))];}
@@ -479,6 +470,7 @@ const imageModalImg=document.getElementById('imageModalImg');
 const imageModalTitle=document.getElementById('imageModalTitle');
 const imageModalZoom=document.getElementById('imageModalZoom');
 const imageModalClose=document.getElementById('imageModalClose');
+const isCoarsePointer=window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches;
 
 function openImageModal(src,title){
   if(!src) return;
@@ -494,8 +486,11 @@ function closeImageModal(){
   imageModal.setAttribute('aria-hidden','true');
   imageModalZoom.classList.remove('zooming');
   imageModalImg.style.transformOrigin='center center';
+  imageModalImg.removeAttribute('style');
   imageModalImg.src='';
   document.body.style.overflow='';
+  // Força o navegador mobile a liberar a camada gráfica do modal antes de voltar ao site.
+  requestAnimationFrame(()=>{ window.scrollBy(0,0); });
 }
 
 document.addEventListener('click',e=>{
@@ -509,17 +504,19 @@ imageModalClose.addEventListener('click',closeImageModal);
 imageModal.addEventListener('click',e=>{if(e.target===imageModal) closeImageModal();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape' && imageModal.classList.contains('open')) closeImageModal();});
 
-imageModalZoom.addEventListener('mousemove',e=>{
-  const rect=imageModalZoom.getBoundingClientRect();
-  const x=((e.clientX-rect.left)/rect.width)*100;
-  const y=((e.clientY-rect.top)/rect.height)*100;
-  imageModalZoom.classList.add('zooming');
-  imageModalImg.style.transformOrigin=`${x}% ${y}%`;
-});
-imageModalZoom.addEventListener('mouseleave',()=>{
-  imageModalZoom.classList.remove('zooming');
-  imageModalImg.style.transformOrigin='center center';
-});
+if(!isCoarsePointer){
+  imageModalZoom.addEventListener('mousemove',e=>{
+    const rect=imageModalZoom.getBoundingClientRect();
+    const x=((e.clientX-rect.left)/rect.width)*100;
+    const y=((e.clientY-rect.top)/rect.height)*100;
+    imageModalZoom.classList.add('zooming');
+    imageModalImg.style.transformOrigin=`${x}% ${y}%`;
+  });
+  imageModalZoom.addEventListener('mouseleave',()=>{
+    imageModalZoom.classList.remove('zooming');
+    imageModalImg.style.transformOrigin='center center';
+  });
+}
 
 
 let counted=false;
