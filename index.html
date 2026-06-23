@@ -21,7 +21,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
 html,body{overflow-x:hidden}
-body{font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 20% 0%,rgba(185,55,255,.18),transparent 35%),radial-gradient(circle at 80% 10%,rgba(123,44,255,.12),transparent 35%),linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);cursor:none}
+body{font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 20% 0%,rgba(185,55,255,.18),transparent 35%),radial-gradient(circle at 80% 10%,rgba(123,44,255,.12),transparent 35%),linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text)}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 .alfa-page{position:relative;min-height:100vh}
@@ -90,7 +90,7 @@ section{padding:110px 7%;position:relative}
 .product-card{position:relative;overflow:hidden;transition:.45s ease}
 .product-image{height:220px;background:linear-gradient(135deg,rgba(185,55,255,.28),rgba(255,255,255,.04));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .product-image img{width:100%;height:100%;object-fit:cover;transition:.8s}
-.product-card:hover .product-image img{transform:scale(1.08)}
+.product-card:hover .product-image img{transform:none}
 .product-placeholder{font-family:Orbitron,sans-serif;text-align:center;font-size:22px;color:#fff;text-shadow:var(--glow);padding:30px}
 .badge-product{position:absolute;top:15px;left:15px;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.65);border:1px solid rgba(185,55,255,.45);font-size:12px;color:#fff;box-shadow:var(--glow)}
 .product-content{padding:26px}
@@ -99,7 +99,7 @@ section{padding:110px 7%;position:relative}
 .product-card p{color:var(--muted);line-height:1.7;margin-bottom:18px}
 
 /* ===== Modal de imagem com zoom no cursor ===== */
-.product-image.has-preview{cursor:zoom-in;}
+.product-image.has-preview{cursor:default;}
 .product-image.has-preview::after{content:'Clique para ampliar';position:absolute;right:12px;bottom:12px;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:12px;font-weight:800;opacity:0;transform:translateY(8px);transition:.25s;z-index:3;pointer-events:none;}
 .product-card:hover .product-image.has-preview::after{opacity:1;transform:translateY(0);}
 .product-image.has-preview img{will-change:auto;}
@@ -241,7 +241,7 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
     <h2 class="section-title">Sobre a <span>Alfa</span></h2>
     <p class="section-subtitle">Templates, páginas e packs digitais prontos, editáveis e pensados para quem quer uma presença online profissional sem começar do zero.</p>
     <div class="about-grid">
-      <div class="about-card glass"><strong>A ALFA Web & Social é uma vitrine digital de templates e recursos visuais prontos para uso.</strong><br><br>Aqui você encontra templates, landing pages, vitrines digitais e packs de posts para Instagram. Todos os produtos são editáveis para você alterar textos, cores, imagens e links depois da compra. O pagamento não acontece neste site: ao clicar em comprar, você será direcionado para a página oficial do produto na Hotmart.</div>
+      <div class="about-card glass"><strong>A ALFA Web & Social é uma vitrine digital de templates e recursos visuais prontos para uso.</strong><br><br>Aqui você encontra templates, landing pages, vitrines digitais e packs de posts para Instagram. Todos os produtos são editáveis para você alterar textos, cores, imagens e links depois da compra.</div>
       <div class="skills">
         <div class="skill glass"><i class="fa-solid fa-pen-nib"></i><h3>Packs Instagram</h3><p>Posts, carrosséis e artes editáveis para deixar o feed mais profissional.</p></div>
         <div class="skill glass"><i class="fa-solid fa-bezier-curve"></i><h3>Layouts Prontos</h3><p>Modelos visuais modernos, organizados e fáceis de adaptar para sua marca.</p></div>
@@ -272,7 +272,7 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
 
   <section class="reveal" id="packs">
     <h2 class="section-title">Packs de <span>Posts</span></h2>
-    <p class="section-subtitle">Packs editáveis para Instagram com artes estratégicas para diferentes nichos e estilos de marca. A compra é concluída na Hotmart.</p>
+    <p class="section-subtitle">Packs editáveis para Instagram com artes estratégicas para diferentes nichos e estilos de marca.</p>
     <div class="shop-tools"><input id="packSearch" class="search-input" placeholder="Buscar pack por nicho, quantidade ou formato..."><span></span></div>
     <div class="filters" id="packFilters"></div>
     <div class="products-grid" id="packsGrid"></div>
@@ -299,7 +299,7 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
 
   <section class="reveal" id="porque">
     <h2 class="section-title">Por que escolher a <span>ALFA</span></h2>
-    <p class="section-subtitle">Uma vitrine criada para produtos digitais prontos, editáveis e fáceis de usar, com compra segura pela Hotmart e um canal de contato para dúvidas.</p>
+    <p class="section-subtitle">Criada para produtos digitais prontos, editáveis e fáceis de usar, com compra segura.</p>
     <div class="testimonials">
       <div class="testimonial glass"><div class="stars"><i class="fa-solid fa-pen-ruler"></i></div><p><strong>Produtos totalmente editáveis</strong><br>Altere textos, cores, imagens e links para adaptar o material à sua marca.</p></div>
       <div class="testimonial glass"><div class="stars"><i class="fa-solid fa-lock"></i></div><p><strong>Compra segura via Hotmart</strong><br>A finalização da compra acontece em uma plataforma conhecida, segura e preparada para produtos digitais.</p></div>
@@ -489,10 +489,7 @@ function closeImageModal(){
 
 document.addEventListener('click',e=>{
   const preview=e.target.closest('.product-image.has-preview');
-  if(preview){
-    e.preventDefault();
-    openImageModal(preview.dataset.previewSrc, preview.dataset.previewTitle);
-  }
+  if(preview){ return; }
 });
 imageModalClose.addEventListener('click',closeImageModal);
 imageModal.addEventListener('click',e=>{if(e.target===imageModal) closeImageModal();});
