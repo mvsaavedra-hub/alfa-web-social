@@ -99,9 +99,9 @@ section{padding:110px 7%;position:relative}
 .product-card p{color:var(--muted);line-height:1.7;margin-bottom:18px}
 
 /* ===== Modal de imagem com zoom no cursor ===== */
-.product-image.has-preview{cursor:default;}
-.product-image.has-preview::after{content:'Clique para ampliar';position:absolute;right:12px;bottom:12px;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:12px;font-weight:800;opacity:0;transform:translateY(8px);transition:.25s;z-index:3;pointer-events:none;}
-.product-card:hover .product-image.has-preview::after{opacity:1;transform:translateY(0);}
+.product-image.has-preview{cursor:default!important;}
+.product-image.has-preview::after{display:none!important;content:none!important;}
+.product-card:hover .product-image.has-preview::after{display:none!important;content:none!important;opacity:0!important;}
 .product-image.has-preview img{will-change:auto;}
 .image-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99999;display:none;align-items:center;justify-content:center;padding:28px;}
 .image-modal.open{display:flex;}
@@ -111,7 +111,7 @@ section{padding:110px 7%;position:relative}
 .image-modal-zoom{position:relative;overflow:hidden;border-radius:24px;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 80px rgba(185,55,255,.26);background:#07030b;cursor:zoom-in;}
 .image-modal-zoom img{display:block;max-width:92vw;max-height:88vh;width:auto;height:auto;transform-origin:center center;transition:transform .12s ease-out;user-select:none;-webkit-user-drag:none;}
 .image-modal-zoom.zooming img{transform:scale(2.15);}
-@media(max-width:760px){.image-modal{padding:14px;backdrop-filter:none;-webkit-backdrop-filter:none}.image-modal-title{font-size:11px}.image-modal-close{top:8px;right:8px}.image-modal-zoom{cursor:default;box-shadow:0 0 24px rgba(185,55,255,.18)}.image-modal-zoom img{max-width:96vw;max-height:82vh;transition:none;transform:none!important}.image-modal-zoom.zooming img{transform:none!important}.product-image.has-preview::after{display:none}}
+@media(max-width:760px){.image-modal{padding:14px;backdrop-filter:none;-webkit-backdrop-filter:none}.image-modal-title{font-size:11px}.image-modal-close{top:8px;right:8px}.image-modal-zoom{cursor:default;box-shadow:0 0 24px rgba(185,55,255,.18)}.image-modal-zoom img{max-width:96vw;max-height:82vh;transition:none;transform:none!important}.image-modal-zoom.zooming img{transform:none!important}.product-image.has-preview::after{display:none!important;content:none!important;}}
 
 .price{font-size:24px;font-weight:900;color:#fff;text-shadow:0 0 14px rgba(185,55,255,.7);margin-bottom:18px}
 .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
@@ -244,7 +244,7 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
       <div class="about-card glass"><strong>A ALFA Web & Social é uma vitrine digital de templates e recursos visuais prontos para uso.</strong><br><br>Aqui você encontra templates, landing pages, vitrines digitais e packs de posts para Instagram. Todos os produtos são editáveis para você alterar textos, cores, imagens e links depois da compra.</div>
       <div class="skills">
         <div class="skill glass"><i class="fa-solid fa-pen-nib"></i><h3>Packs Instagram</h3><p>Posts, carrosséis e artes editáveis para deixar o feed mais profissional.</p></div>
-        <div class="skill glass"><i class="fa-solid fa-bezier-curve"></i><h3>Layouts Prontos</h3><p>Modelos visuais modernos, organizados e fáceis de adaptar para sua marca.</p></div>
+        <div class="skill glass"><i class="fa-solid fa-bezier-curve"></i><h3>Layouts Prontos ou Personalizados</h3><p>Modelos visuais modernos, organizados e fáceis de adaptar para sua marca.</p></div>
         <div class="skill glass"><i class="fa-solid fa-code"></i><h3>Landing Pages</h3><p>Páginas prontas e responsivas para vendas, portfólio e apresentação de produtos.</p></div>
         <div class="skill glass"><i class="fa-solid fa-layer-group"></i><h3>Templates e Páginas</h3><p>Templates editáveis, vitrines digitais e páginas prontas para marcas, blogs e produtos digitais.</p></div>
       </div>
@@ -318,14 +318,16 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
       <div class="faq-item glass"><button class="faq-q">Receberei instruções para instalação? <span>+</span></button><div class="faq-a">Sim. Junto com o produto você receberá um guia passo a passo mostrando como instalar, configurar e utilizar o material adquirido. Os templates incluem instruções sobre onde inserir os códigos e como realizar as principais personalizações.</div></div>
       <div class="faq-item glass"><button class="faq-q">Preciso saber programar para usar os templates? <span>+</span></button><div class="faq-a">Não. Os produtos acompanham instruções detalhadas para facilitar a instalação e configuração. Caso tenha dúvidas relacionadas ao produto adquirido, você poderá entrar em contato pelo suporte do WhatsApp.</div></div>
       <div class="faq-item glass"><button class="faq-q">Preciso contratar hospedagem? <span>+</span></button><div class="faq-a">Não. O site pode ser publicado gratuitamente através do GitHub Pages utilizando o guia de instalação que acompanha o produto. Caso prefira, também pode ser hospedado em outros serviços compatíveis.</div></div>
+      <div class="faq-item glass"><button class="faq-q">Vocês criam sites personalizados? <span>+</span></button><div class="faq-a">Sim. Desenvolvemos sites totalmente personalizados de acordo com as necessidades do seu negócio, identidade visual e objetivos. Cada projeto é planejado para oferecer a melhor experiência aos seus clientes.</div></div>
+      <div class="faq-item glass"><button class="faq-q">Como fazer a solicitação de um site personalizado? <span>+</span></button><div class="faq-a">Para solicitar um site personalizado, basta entrar em contato conosco através do formulário. Será feita uma análise das suas necessidades e forneceremos um orçamento detalhado.</div></div>
     </div>
   </section>
 
 
   <section class="reveal" id="contato">
-    <h2 class="section-title">Contato para <span>Dúvidas</span></h2>
-    <p class="section-subtitle">Tem alguma pergunta sobre os produtos, acesso, instalação ou compra? Envie sua mensagem pelo formulário abaixo.</p>
-    <form class="custom-form glass" action="https://formsubmit.co/melinv.saavedra@gmail.com" method="POST">
+    <h2 class="section-title">Entre em <span>Contato</span></h2>
+    <p class="section-subtitle">Quer solicitar um site personalizado ? ou tem alguma pergunta sobre os produtos, acesso, instalação ou compra? Envie sua mensagem pelo formulário abaixo.</p>
+    <form class="custom-form glass" action="https://formsubmit.co/alfawebesocial@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="Nova dúvida pelo site ALFA Web & Social">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://mvsaavedra-hub.github.io/alfa-web-social/obrigado.html">
@@ -341,7 +343,7 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
         <textarea name="mensagem" placeholder="Escreva sua dúvida aqui..." required></textarea>
       </label>
       
-      <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar dúvida</button>
+      <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar mensagem</button>
     </form>
   </section>
 
@@ -370,11 +372,11 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
 <script>
 /* ===================== PRODUTOS ===================== */
 const templates = [
-  { nome:'Template Serena', categoria:'Portfólio', preco:'R$ 149', badge:'Novo', imagem:'imagens/templates/template-serena.png', descricao:'Página moderna e editável para profissionais apresentarem serviços, projetos e contato profissional.', demo:'https://template-serena-demo.pages.dev', compra:'https://hotmart.com/product/template-serena/R106202020N' }
+  { nome:'Template Serena', categoria:'Portfólio', preco:'R$ 47', badge:'Novo', imagem:'imagens/templates/template-serena.png', descricao:'Página moderna e editável para profissionais apresentarem serviços, projetos e contato profissional.', demo:'https://template-serena-demo.pages.dev', compra:'https://hotmart.com/product/template-serena/R106202020N' }
 ];
 
 const packs = [
-  { nome:'Pack Burger Premium', categoria:'Loja', preco:'R$ 58', badge:'Restaurante', imagem:'imagens/posts/pack-burger.png', descricao:'30 posts profissionais, 15 Artes para feed, 5 Stories e 2 Carrosséis. Ideal para hamburguerias, restaurantes, lanchonetes, food trucks e negócios do ramo alimentício que desejam manter uma presença forte e profissional nas redes sociais.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' }
+  { nome:'Pack Burger Premium', categoria:'Loja', preco:'R$ 36', badge:'Restaurante', imagem:'imagens/posts/pack-burger.png', descricao:'30 posts profissionais, 15 Artes para feed, 5 Stories e 2 Carrosséis. Ideal para hamburguerias, restaurantes, lanchonetes, food trucks e negócios do ramo alimentício que desejam manter uma presença forte e profissional nas redes sociais.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' }
 ];
 
 /* ===================== SISTEMA DA PÁGINA ===================== */
