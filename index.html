@@ -330,7 +330,7 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
     <form class="custom-form glass" action="https://formsubmit.co/alfawebesocial@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="Nova dúvida pelo site ALFA Web & Social">
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://mvsaavedra-hub.github.io/alfa-web-social/obrigado.html">
+      <input type="hidden" name="_next" id="formNextUrl" value="">
       <div class="form-grid">
         <label>Nome
           <input type="text" name="nome" placeholder="Seu nome" required>
@@ -372,11 +372,11 @@ footer .footer-links a:hover{border-color:rgba(185,55,255,.9);box-shadow:0 0 22p
 <script>
 /* ===================== PRODUTOS ===================== */
 const templates = [
-  { nome:'Template Serena', categoria:'Portfólio', preco:'R$ 47', badge:'Novo', imagem:'imagens/templates/template-serena.png', descricao:'Página moderna e editável para profissionais apresentarem serviços, projetos e contato profissional.', demo:'https://template-serena-demo.pages.dev', compra:'https://hotmart.com/product/template-serena/R106202020N' }
+  { nome:'Template Serena', categoria:'Portfólio', preco:'R$ 149', badge:'Novo', imagem:'imagens/templates/template-serena.png', descricao:'Página moderna e editável para profissionais apresentarem serviços, projetos e contato profissional.', demo:'https://template-serena-demo.pages.dev', compra:'https://hotmart.com/product/template-serena/R106202020N' }
 ];
 
 const packs = [
-  { nome:'Pack Burger Premium', categoria:'Loja', preco:'R$ 36', badge:'Restaurante', imagem:'imagens/posts/pack-burger.png', descricao:'30 posts profissionais, 15 Artes para feed, 5 Stories e 2 Carrosséis. Ideal para hamburguerias, restaurantes, lanchonetes, food trucks e negócios do ramo alimentício que desejam manter uma presença forte e profissional nas redes sociais.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' }
+  { nome:'Pack Burger Premium', categoria:'Loja', preco:'R$ 57', badge:'Restaurante', imagem:'imagens/posts/pack-burger.png', descricao:'30 posts profissionais, 15 Artes para feed, 5 Stories e 2 Carrosséis. Ideal para hamburguerias, restaurantes, lanchonetes, food trucks e negócios do ramo alimentício que desejam manter uma presença forte e profissional nas redes sociais.', compra:'https://pay.hotmart.com/SEU-LINK-DO-PRODUTO' }
 ];
 
 /* ===================== SISTEMA DA PÁGINA ===================== */
@@ -519,5 +519,16 @@ const countObs=new IntersectionObserver(entries=>entries.forEach(entry=>{
 const resultadosSection=document.getElementById('resultados'); if(resultadosSection){countObs.observe(resultadosSection);}
 </script>
 
+
+<script>
+  // Define automaticamente a página de obrigado conforme a URL atual do GitHub Pages.
+  // Assim o formulário continua funcionando mesmo se o nome do repositório mudar.
+  (function(){
+    const nextInput = document.getElementById('formNextUrl');
+    if(nextInput){
+      nextInput.value = new URL('obrigado.html', window.location.href).href;
+    }
+  })();
+</script>
 </body>
 </html>
